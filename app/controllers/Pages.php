@@ -23,7 +23,9 @@ class Pages extends Controller
         if (isset($_POST['update'])) {
             $edit = new User();
             $edit->editUser();
-            header('refresh:0');
+            echo '<div class="alert alert-primary" role="alert">
+            user edited successfully!
+             </div>';
         }
         $users = $this->userModel->getUsers();
         $data = [
@@ -37,7 +39,9 @@ class Pages extends Controller
         if (isset($_POST['submit'])) {
             $user = new User();
             $user->createUser();
-            echo 'done';
+            echo '<div class="alert alert-primary" role="alert">
+            user created successfully!
+             </div>';
         }
         $this->view('create');
     }
@@ -48,8 +52,6 @@ class Pages extends Controller
             $login = new User();
             $login->userLogin();
         }
-
-
         $this->view('index');
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +61,9 @@ class Pages extends Controller
         if (isset($_POST['submit'])) {
             $signUp = new User();
             $signUp->userSignup();
-            echo 'done';
+            echo '<div class="alert alert-primary" role="alert">
+            signed up successfully!
+             </div>';
         }
         $this->view('signup');
     }

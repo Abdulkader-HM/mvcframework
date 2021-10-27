@@ -24,7 +24,7 @@ include 'layout.php';
          <input type="password" class="form-control" name="cpassword" placeholder="confirme password" required>
       </div>
       <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-      <a href="../" class="btn btn-success">Back</a>
+      <a href="./" class="btn btn-success">Back</a>
    </fieldset>
 </form>
 

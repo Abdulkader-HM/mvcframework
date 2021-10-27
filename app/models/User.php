@@ -13,7 +13,7 @@ class User
     //Test (database and table needs to exist before this works)
     public function getUsers()
     {
-        $this->db->query(" SELECT * FROM users ");
+        $this->db->query(" SELECT * FROM users WHERE type='user' ");
         $result = $this->db->resultSet();
         return $result;
     }
@@ -33,7 +33,6 @@ class User
         $this->db->query("INSERT INTO users (user_name,type,user_email,password)
         VALUES ('" . $_POST['name'] . "','user','" . $_POST['email'] . "','" . $_POST['password'] . "')");
         $this->db->execute();
-        echo 'done';
     }
     /////////////////////////////////////////////////////////////////////////////////////////////
     public function userLogin()
@@ -75,7 +74,7 @@ class User
     public function editUser()
     {
         $name = $_POST['name'];
-        $this->db->query(" UPDATE users  SET user_name='$name'  WHERE user_id=" . $_GET['edit']);
+        $this->db->query(" UPDATE users  SET user_name='$name'  WHERE user_id=" . $_POST['id']);
         $this->db->execute();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
