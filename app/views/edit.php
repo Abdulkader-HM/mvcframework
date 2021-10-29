@@ -7,7 +7,6 @@ include 'layout.php';
         <legend>
             <center>Edit page</center>
         </legend>
-
         <div class="mb-3">
             <label class="form-label">Name</label>
             <input type="text" class="form-control" name="name" value="<?= $data[0]->user_name ?>">

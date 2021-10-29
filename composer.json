@@ -1,0 +1,9 @@
+{
+    "require": {
+        "filp/whoops": "^2.14",
+        "maximebf/debugbar": "^1.17"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.3"
+    }
+}

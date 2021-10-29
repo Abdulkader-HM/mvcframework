@@ -2,7 +2,7 @@
 include 'layout.php';
 $result = $_SESSION['user'];
 if ($result->type === 'admin') {
-    ?>
+?>
     <div class="container">
         <div class="table-responsive-sm">
             <table class="table table-stiped table-hover">
@@ -23,12 +23,13 @@ if ($result->type === 'admin') {
                     <?php
                     include 'data.php'
                     ?>
+        
                 </tbody>
             </table>
         </div>
     </div>
 
-    <?php
+<?php
 } else {
     header('location:' . URLROOT . '');
 }
