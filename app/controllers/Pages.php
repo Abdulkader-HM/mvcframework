@@ -1,5 +1,6 @@
 <?php
 
+// require_once __DIR__ . "/../libraries/Controller.php";
 class Pages extends Controller
 {
     public $id;
@@ -15,6 +16,7 @@ class Pages extends Controller
             $delete->deleteUser();
             header('location:' . URLROOT . 'pages/adminpage');
         }
+
 
         if (isset($_GET['edit'])) {
             $users = $this->userModel->getName();
@@ -81,4 +83,9 @@ class Pages extends Controller
     }
 
     // /////////////////////////////////////////////////////////////////////////////////////////
+
+    public function add($num1, $num2)
+    {
+        return $num1 + $num2;
+    }
 }

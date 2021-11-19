@@ -1,6 +1,13 @@
 <?php
 
 use Whoops\Handler\PrettyPageHandler;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\CliDumper;
+use Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider;
+use Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider;
+use Symfony\Component\VarDumper\Dumper\HtmlDumper;
+use Symfony\Component\VarDumper\Dumper\ServerDumper;
+use Symfony\Component\VarDumper\VarDumper;
 
 //Database params
 define('DB_HOST', 'localhost'); //Add your db host
@@ -29,10 +36,3 @@ $handler = new PrettyPageHandler;
 $handler->setEditor('vscode');
 $whoops->pushHandler($handler);
 $whoops->register();
-
-
-
-// $someVar = 'test';
-// dump($someVar);
-// // dump() returns the passed value, so you can dump an object and keep using it
-// dump($whoops)->someMethod();

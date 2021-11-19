@@ -1,5 +1,6 @@
 <?php
 
+
 //Load the model and the view
 class Controller
 {
@@ -20,4 +21,6 @@ class Controller
             die("View does not exists.");
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////
 }

@@ -1,9 +1,11 @@
 {
     "require": {
         "filp/whoops": "^2.14",
-        "maximebf/debugbar": "^1.17"
     },
     "require-dev": {
+        "phpunit/phpunit": "^9",
+        "maximebf/debugbar": "^1.17",
         "symfony/var-dumper": "^5.3"
     }
+  
 }
