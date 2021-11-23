@@ -63,6 +63,7 @@ class User
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // public function createUser($name, $type, $email, $password)
     public function createUser()
     {
         $this->db->query("INSERT INTO users (user_name,type,user_email,password)

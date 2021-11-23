@@ -1,13 +1,13 @@
 <?php
 
-
+// require_once __DIR__ . "/../models/User.php";
 //Load the model and the view
 class Controller
 {
     public function model($model)
     {
         //Require model file
-        require_once '../app/models/' . $model . '.php';
+        require_once __DIR__ . '/../models/' . $model . '.php';
         //Instantiate model
         return new $model();
     }

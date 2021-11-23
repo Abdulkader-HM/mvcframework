@@ -1,6 +1,6 @@
 <?php
 
-// require_once __DIR__ . "/../libraries/Controller.php";
+require_once __DIR__ . "/../libraries/Controller.php";
 class Pages extends Controller
 {
     public $id;
@@ -39,13 +39,14 @@ class Pages extends Controller
     public function create()
     {
         if (isset($_POST['submit'])) {
-            $user = new User();
-            $user->createUser();
+            $this->addUser($_POST['name'], $_POST['type'], $_POST['email'], $_POST['password']);
+            // $user = new User();
+            // $user->createUser();
             echo '<div class="alert alert-primary" role="alert">
             user created successfully!
              </div>';
         }
-        $this->view('create');
+        // $this->view('create');
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     public function index()
@@ -83,9 +84,10 @@ class Pages extends Controller
     }
 
     // /////////////////////////////////////////////////////////////////////////////////////////
-
-    public function add($num1, $num2)
+    public function addUser($name, $type, $password, $email)
     {
-        return $num1 + $num2;
+        $user = new User();
+        $user->createUser($name, $type, $email, $password);
+        return (true);
     }
 }
