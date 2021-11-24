@@ -9,11 +9,10 @@ class Pages extends Controller
         $this->userModel = $this->model('User');
     }
     //////////////////////////////////////////////////////////////////////////////////////////////
-    public function adminPage()
+    public function adminPage($id)
     {
         if (isset($_GET['delete'])) {
-            $delete = new User();
-            $delete->deleteUser();
+            $this->userDelete($_GET['delete']);
             header('location:' . URLROOT . 'pages/adminpage');
         }
 
@@ -23,8 +22,7 @@ class Pages extends Controller
             $this->view('edit', $users);
         }
         if (isset($_POST['update'])) {
-            $edit = new User();
-            $edit->editUser();
+            $this->userEdit($_POST['update']);
             echo '<div class="alert alert-primary" role="alert">
             user edited successfully!
              </div>';
@@ -40,20 +38,17 @@ class Pages extends Controller
     {
         if (isset($_POST['submit'])) {
             $this->addUser($_POST['name'], $_POST['type'], $_POST['email'], $_POST['password']);
-            // $user = new User();
-            // $user->createUser();
             echo '<div class="alert alert-primary" role="alert">
             user created successfully!
              </div>';
         }
-        // $this->view('create');
+        $this->view('create');
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     public function index()
     {
         if (isset($_POST['submit'])) {
-            $login = new User();
-            $login->userLogin();
+            $this->userLogin($_POST['email'], $_POST['password']);
         }
         $this->view('index');
     }
@@ -62,13 +57,12 @@ class Pages extends Controller
     public function signup()
     {
         if (isset($_POST['submit'])) {
-            $signUp = new User();
-            $signUp->userSignup();
+            $this->userSignup($_POST['name'], $_POST['email'], $_POST['password']);
             echo '<div class="alert alert-primary" role="alert">
             signed up successfully!
              </div>';
         }
-        $this->view('signup');
+        // $this->view('signup');
     }
 
     public function logout()
@@ -80,14 +74,37 @@ class Pages extends Controller
 
     public function userPage()
     {
-        $this->view('userpage');
+        return $this->view('userpage');
     }
 
-    // /////////////////////////////////////////////////////////////////////////////////////////
-    public function addUser($name, $type, $password, $email)
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    public function addUser($name, $email, $password)
     {
         $user = new User();
-        $user->createUser($name, $type, $email, $password);
-        return (true);
+        return $user->createUser($name, $email, $password);
+    }
+
+    public function userSignup($name, $email, $password)
+    {
+        $signUp = new User();
+        return $signUp->userSignup($name, $email, $password);
+    }
+
+    public function userDelete($id)
+    {
+        $delete = new User();
+        return $delete->deleteUser($id);
+    }
+
+    public function userEdit($id, $name,)
+    {
+        $edit = new User();
+        return $edit->editUser($id, $name);
+    }
+
+    public function userLogin($email, $password)
+    {
+        $login = new User();
+        return $login->chechUser($email, $password);
     }
 }

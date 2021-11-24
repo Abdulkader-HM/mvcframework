@@ -17,14 +17,37 @@ class PagesTest extends TestCase
     public function testcreate()
     {
         $create = new Pages();
-        $result = $create->create('name', 'user', 'email.email.com', 123123);
-        $this->assertTrue(true);
+        $result = $create->addUser('name', 'email@email.com', 123123);
+        $this->assertTrue($result);
     }
 
     public function testSignUp()
     {
-        $create = new Pages();
-        $result = $create->create('name', 'user', 'email.email.com', 123123);
-        $this->assertTrue(true);
+        $signup = new Pages();
+        $result = $signup->userSignup('name', 'email.email.com', 123123);
+        $this->assertTrue($result);
+    }
+
+    public function testDelete()
+    {
+        $delete = new Pages();
+        $result = $delete->userDelete(24);
+        $this->assertTrue($result);
+    }
+
+    public function testEdit()
+    {
+        $update = new Pages();
+        $result = $update->userEdit(52, 'editUser');
+        $this->assertTrue($result);
+    }
+
+    public function testLogin()
+    {
+        $login = new Pages();
+        $result = $login->userLogin('test@test.com', 12);
+        $this->assertIsObject($result);
+        $this->assertEquals($result->type, 'user');
+
     }
 }

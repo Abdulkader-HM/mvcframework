@@ -6,7 +6,7 @@ class User
 
     public function __construct()
     {
-        $this->db = new Database;
+        $this->db = new Database();
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,23 +28,19 @@ class User
         return $result;
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////
-    public function userSignup()
+    public function userSignup($name, $email, $password)
     {
         $this->db->query("INSERT INTO users (user_name,type,user_email,password)
-        VALUES ('" . $_POST['name'] . "','user','" . $_POST['email'] . "','" . $_POST['password'] . "')");
-        $this->db->execute();
+        VALUES ('$name','user','$email','$password')");
+        return $this->db->execute();
     }
     /////////////////////////////////////////////////////////////////////////////////////////////
-    public function userLogin()
+    public function userLogin($email, $password)
     {
 
-        $eamil = $_POST['email'];
-        $password = $_POST['password'];
-        $this->db->query(" SELECT * FROM users WHERE user_email=:email AND password=:password");
-        $this->db->bind("email", $eamil);
-        $this->db->bind('password', $password);
-        $this->db->execute();
-        $result = $this->db->single();
+        // $eamil = $_POST['email'];
+        // $password = $_POST['password'];
+        $result = $this->chechUser($email, $password);
 
         if ($result) {
             $_SESSION['user'] = $result;
@@ -63,29 +59,27 @@ class User
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // public function createUser($name, $type, $email, $password)
-    public function createUser()
+    public function createUser($name, $email, $password)
     {
         $this->db->query("INSERT INTO users (user_name,type,user_email,password)
-        VALUES ('" . $_POST['name'] . "','user','" . $_POST['email'] . "','" . $_POST['password'] . "')");
-        $this->db->execute();
+        VALUES ('$name','user','$email','$password')");
+        return $this->db->execute();
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    public function editUser($id, $name)
+    {
+        // $name = $_POST['name'];
+        $this->db->query(" UPDATE users  SET user_name='$name'  WHERE user_id=$id");
+        return $this->db->execute();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public function editUser()
+    public function deleteUser($id)
     {
-        $name = $_POST['name'];
-        $this->db->query(" UPDATE users  SET user_name='$name'  WHERE user_id=" . $_POST['id']);
-        $this->db->execute();
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public function deleteUser()
-    {
-        $id = $_GET['delete'];
+        // $id = $_GET['delete'];
         $this->db->query("DELETE FROM users WHERE user_id =:id ");
         $this->db->bind(':id', $id);
-        $this->db->execute();
+        return $this->db->execute();
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     public function getName()
@@ -95,5 +89,15 @@ class User
         $result = $this->db->resultSet();
 
         return $result;
+    }
+
+    public function chechUser($email, $password)
+    {
+        $this->db->query(" SELECT * FROM users WHERE user_email=:email AND password=:password");
+        $this->db->bind("email", $email);
+        $this->db->bind('password', $password);
+        $this->db->execute();
+        return $this->db->single();
+
     }
 }
